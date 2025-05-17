@@ -10,11 +10,11 @@ export class TodoService {
       id: '1',
       name: 'Learn Angular',
       description: 'Need to watch a tutorial for it',
-      status: 'todo',
+      status: 'in-progress',
       creationDate: new Date(),
     },
-    { id: '2', name: 'Master Tailwind CSS', description: '', status: 'todo', creationDate: new Date() },
-    { id: '3', name: 'Build Todo App', description: '', status: 'in-progress', creationDate: new Date() },
+    { id: '2', name: 'Master Tailwind CSS', description: '', status: 'completed', creationDate: new Date() },
+    { id: '3', name: 'Build Todo App', description: '', status: 'todo', creationDate: new Date() },
   ]
 
   filteredTodoList: Todo[] = this.todoList

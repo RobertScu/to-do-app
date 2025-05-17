@@ -1,6 +1,18 @@
-<div class="p-4 bg-white rounded-lg hover:shadow-lg">
+<div class="p-4 rounded-lg hover:shadow-lg bg-gray-700">
   <div class="flex items-center justify-between mb-2">
-    <h3 class="text-lg font-semibold">{{ todo.name }}</h3>
+    <h3 class="text-md font-semibold text-gray-200">{{ todo.name }}</h3>
+    <span class="text-xs text-gray-400">
+      {{ formatDate(todo.creationDate, 'dd MMM YYYY, HH:mm', 'en-US') }}
+    </span>
+  </div>
+
+  <p class="text-xs text-gray-400 mb-2">{{ todo.description }}</p>
+
+  <div class="flex items-center justify-between">
+    <app-todo-status-picker
+      [currentStatus]="todo.status"
+      (statusChange)="todoService.changeTodoStatus(todo.id, $event)"
+    />
     <button
       (click)="onDeleteClick()"
       class="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-50"
@@ -11,23 +23,6 @@
           clip-rule="evenodd" />
       </svg>
     </button>
-  </div>
-
-  <p class="text-xs  text-gray-600 mb-2">{{ todo.description }}</p>
-
-  <div class="flex items-center justify-between mt-4">
-    <span
-      class=" py-1 text-sm rounded-full"
-    >
-      Status:
-       <app-todo-status-picker
-         [currentStatus]="todo.status ?? 'todo'"
-         (statusChange)="todoService.changeTodoStatus(todo.id, $event)"
-       />
-    </span>
-    <span class="text-xs text-gray-500">
-      {{ formatDate(todo.creationDate ?? "N/A", 'dd MMM YYYY, HH:mm', 'en-US') }}
-    </span>
   </div>
 </div>
 

@@ -1,11 +1,12 @@
 <select
   [ngModel]="currentStatus"
   (ngModelChange)="onStatusSelect($event)"
-  class="py-1 rounded-lg appearance-none cursor-pointer text-center"
+  class="px-2 py-1 rounded-lg text-xs font-medium appearance-none"
+  [class]="[getStatusBgColor(currentStatus), getStatusTextColor(currentStatus)]"
 >
-
-  <option value="" disabled>Select status</option>
-  <option *ngFor="let status of TodoStatusValues" [value]="status">
-    <span class="text-red-400">{{ status }}</span>
+  <option *ngFor="let status of TodoStatusValues" [value]="status"
+    class="font-medium text-xs bg-gray-200 text-center  ml-5"
+    [class]="getStatusTextColor(status)">
+    {{ status }}
   </option>
 </select>
