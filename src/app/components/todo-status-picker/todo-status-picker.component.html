@@ -1,0 +1,11 @@
+<select
+  [ngModel]="currentStatus"
+  (ngModelChange)="onStatusSelect($event)"
+  class="py-1 rounded-lg appearance-none cursor-pointer text-center"
+>
+
+  <option value="" disabled>Select status</option>
+  <option *ngFor="let status of TodoStatusValues" [value]="status">
+    <span class="text-red-400">{{ status }}</span>
+  </option>
+</select>

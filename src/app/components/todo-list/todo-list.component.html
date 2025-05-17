@@ -1,0 +1,17 @@
+<section class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-6">
+  <div class="max-w-2xl mx-auto">
+    <app-todo-header class="block mb-6" />
+    <app-todo-add-item />
+    <div class="bg-white/20 backdrop-blur-lg rounded-xl p-6 shadow-xl">
+      <div class="grid grid-cols-1 gap-4">
+        @for (todo of todoService.filteredTodoList; track todo.id) {
+          <app-todo-card [todo]="todo" />
+        } @empty {
+          <div class="text-center py-8 text-white">
+            <p>No todos yet. Add your first task!</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
