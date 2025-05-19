@@ -1,8 +1,8 @@
 <select
-  [ngModel]="currentStatus"
-  (ngModelChange)="onStatusSelect($event)"
+  [ngModel]="todo.status"
+  (ngModelChange)="updateStatus($event)"
   class="px-2 py-1 rounded-lg text-xs font-medium appearance-none"
-  [class]="[getStatusBgColor(currentStatus), getStatusTextColor(currentStatus)]"
+  [class]="[getStatusBgColor(todo.status), getStatusTextColor(todo.status)]"
 >
   <option *ngFor="let status of TodoStatusValues" [value]="status"
     class="font-medium text-xs bg-gray-200 text-center  ml-5"

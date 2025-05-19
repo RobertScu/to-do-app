@@ -1,8 +1,14 @@
-import { Component } from '@angular/core'
-import { TodoService } from 'src/app/services/todo.service'
+import { Component, inject } from '@angular/core'
 import { v4 as uuid } from 'uuid'
 import { FormsModule } from '@angular/forms'
-import { TodoStatus } from 'src/app/models/todo-models'
+import { TodoStatus } from 'src/app/models/todo.models'
+import { TodoListStore } from 'src/app/stores/todo-list.store'
+
+type TodoForm = {
+  name: string
+  description: string
+  status: TodoStatus
+}
 
 @Component({
   selector: 'app-todo-add-item',
@@ -12,34 +18,28 @@ import { TodoStatus } from 'src/app/models/todo-models'
   styleUrl: './todo-add-item.component.css',
 })
 export class TodoAddItemComponent {
-  newTodo = {
+  private readonly todos = inject(TodoListStore)
+
+  newTodo: TodoForm = {
     name: '',
     description: '',
-    status: 'todo' as TodoStatus,
+    status: 'todo',
   }
-
-  constructor(private todoService: TodoService) {}
 
   addTodo() {
-    if (this.newTodo.name.trim()) {
-      this.todoService.addTodo({
-        id: uuid(),
-        name: this.newTodo.name.trim(),
-        description: this.newTodo.description.trim(),
-        status: this.newTodo.status,
-        creationDate: new Date(),
-      })
+    this.todos.add({
+      id: uuid(),
+      name: this.newTodo.name.trim(),
+      description: this.newTodo.description.trim(),
+      status: this.newTodo.status,
+      creationDate: new Date(),
+    })
 
-      // Reset form
-      this.newTodo = {
-        name: '',
-        description: '',
-        status: 'todo',
-      }
-    }
+    this.resetForm()
   }
 
-  onStatusChange(status: TodoStatus) {
-    this.newTodo.status = status
+  resetForm() {
+    this.newTodo.name = ''
+    this.newTodo.description = ''
   }
 }

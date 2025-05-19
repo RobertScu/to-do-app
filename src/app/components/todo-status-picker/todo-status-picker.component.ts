@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, inject, Input } from '@angular/core'
 import { NgForOf } from '@angular/common'
 import { FormsModule } from '@angular/forms'
-import { TodoStatus, TodoStatusValues } from 'src/app/models/todo-models'
+import { TodoItem, TodoStatus, TodoStatusValues } from 'src/app/models/todo.models'
 import { getStatusBgColor, getStatusTextColor } from 'src/app/utils/status-color-picker'
+import { TodoListStore } from 'src/app/stores/todo-list.store'
 
 @Component({
   selector: 'app-todo-status-picker',
@@ -12,14 +13,15 @@ import { getStatusBgColor, getStatusTextColor } from 'src/app/utils/status-color
   standalone: true,
 })
 export class TodoStatusPickerComponent {
-  @Input() currentStatus!: TodoStatus
-  @Output() statusChange = new EventEmitter<TodoStatus>()
+  @Input() todo!: TodoItem
 
-  onStatusSelect(status: TodoStatus) {
-    this.statusChange.emit(status)
+  private readonly todos = inject(TodoListStore)
+
+  readonly TodoStatusValues = TodoStatusValues
+  readonly getStatusTextColor = getStatusTextColor
+  readonly getStatusBgColor = getStatusBgColor
+
+  updateStatus(status: TodoStatus) {
+    this.todos.updateStatus(this.todo.id, status)
   }
-
-  protected readonly TodoStatusValues = TodoStatusValues
-  protected readonly getStatusTextColor = getStatusTextColor
-  protected readonly getStatusBgColor = getStatusBgColor
 }

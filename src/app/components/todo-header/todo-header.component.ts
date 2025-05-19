@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { TodoService } from 'src/app/services/todo.service'
+import { Component, inject } from '@angular/core'
+import { TodoListStore } from 'src/app/stores/todo-list.store'
 
 @Component({
   selector: 'app-todo-header',
@@ -9,10 +9,5 @@ import { TodoService } from 'src/app/services/todo.service'
   styleUrl: './todo-header.component.css',
 })
 export class TodoHeaderComponent {
-  constructor(private todoService: TodoService) {}
-
-  onSearch(event: Event) {
-    const searchTerm = (event.target as HTMLInputElement).value
-    this.todoService.filterResults(searchTerm)
-  }
+  protected readonly todos = inject(TodoListStore)
 }

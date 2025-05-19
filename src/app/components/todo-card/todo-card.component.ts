@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core'
-import { Todo } from 'src/app/models/todo-models'
+import { TodoItem } from 'src/app/models/todo.models'
 import { formatDate } from '@angular/common'
 import { TodoStatusPickerComponent } from 'src/app/components/todo-status-picker/todo-status-picker.component'
-import { TodoService } from 'src/app/services/todo.service'
 import { CommonActionModalComponent } from 'src/app/common/common-action-modal/common-action-modal.component'
+import { TodoListStore } from 'src/app/stores/todo-list.store'
 
 @Component({
   selector: 'app-todo-card',
@@ -13,8 +13,10 @@ import { CommonActionModalComponent } from 'src/app/common/common-action-modal/c
   imports: [TodoStatusPickerComponent, CommonActionModalComponent],
 })
 export class TodoCardComponent {
-  @Input({ required: true }) todo!: Todo
-  protected readonly formatDate = formatDate
+  @Input({ required: true }) todo!: TodoItem
+
+  private readonly todos = inject(TodoListStore)
+  readonly formatDate = formatDate
 
   showDeleteDialog = false
 
@@ -23,13 +25,11 @@ export class TodoCardComponent {
   }
 
   onConfirmDelete(): void {
-    this.todoService.deleteTodo(this.todo.id)
+    this.todos.delete(this.todo.id)
     this.showDeleteDialog = false
   }
 
   onCancelDelete(): void {
     this.showDeleteDialog = false
   }
-
-  todoService: TodoService = inject(TodoService)
 }

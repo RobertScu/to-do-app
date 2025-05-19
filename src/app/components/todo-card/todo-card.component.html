@@ -9,10 +9,7 @@
   <p class="text-xs text-gray-400 mb-2">{{ todo.description }}</p>
 
   <div class="flex items-center justify-between">
-    <app-todo-status-picker
-      [currentStatus]="todo.status"
-      (statusChange)="todoService.changeTodoStatus(todo.id, $event)"
-    />
+    <app-todo-status-picker [todo]="todo" />
     <button
       (click)="onDeleteClick()"
       class="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-50"
