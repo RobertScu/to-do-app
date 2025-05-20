@@ -1,0 +1,7 @@
+@if (snackbar()) {
+  <div
+    class="fixed bottom-4 left-0 right-0 mx-auto max-w-xs flex items-center justify-center px-0 py-2 rounded-lg z-50 bg-green-500 text-white snackbar-enter"
+  >
+    {{ snackbar()?.message }}
+  </div>
+}
