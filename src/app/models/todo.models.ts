@@ -1,7 +1,7 @@
 export const TodoStatusValues: TodoStatus[] = ['todo', 'completed', 'in progress']
 export type TodoStatus = 'todo' | 'completed' | 'in progress'
 
-export type TodoItem = {
+export interface TodoItem {
   id: string
   name: string
   description?: string

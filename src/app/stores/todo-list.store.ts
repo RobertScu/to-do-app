@@ -5,13 +5,14 @@ import { computed } from '@angular/core'
 const initialState: TodoItem[] = [
   {
     id: '1',
-    name: 'Learn Angular',
-    description: 'Need to watch a tutorial for it',
-    status: 'in progress',
+    name: 'Buy stand-up comedy tickets',
+    description: 'Jimmy Carr is coming to Copenhagen on 25th of April 2025. Invite friends',
+    status: 'todo',
     creationDate: new Date(),
   },
-  { id: '2', name: 'Master Tailwind CSS', description: '', status: 'completed', creationDate: new Date() },
-  { id: '3', name: 'Build Todo App', description: '', status: 'todo', creationDate: new Date() },
+  { id: '2', name: 'Hands-on Angular, TailwindCSS and signals', description: '', status: 'in progress', creationDate: new Date() },
+  { id: '3', name: 'Close gym membership', description: 'By the end of April', status: 'completed', creationDate: new Date() },
+  { id: '4', name: 'Improve dad jokes', description: '', status: 'in progress', creationDate: new Date() },
 ]
 
 export const TodoListStore = signalStore(

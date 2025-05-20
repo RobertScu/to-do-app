@@ -5,7 +5,7 @@
   [class]="[getStatusBgColor(todo.status), getStatusTextColor(todo.status)]"
 >
   <option *ngFor="let status of TodoStatusValues" [value]="status"
-    class="font-medium text-xs bg-gray-200 text-center  ml-5"
+    class="font-medium text-xs bg-gray-200 text-center ml-5"
     [class]="getStatusTextColor(status)">
     {{ status }}
   </option>

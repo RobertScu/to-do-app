@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid'
 import { FormsModule } from '@angular/forms'
 import { TodoStatus } from 'src/app/models/todo.models'
 import { TodoListStore } from 'src/app/stores/todo-list.store'
+import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service'
 
 type TodoForm = {
   name: string
@@ -19,6 +20,7 @@ type TodoForm = {
 })
 export class TodoAddItemComponent {
   private readonly todos = inject(TodoListStore)
+  private readonly snackbarService = inject(SnackbarService)
 
   newTodo: TodoForm = {
     name: '',
@@ -33,6 +35,10 @@ export class TodoAddItemComponent {
       description: this.newTodo.description.trim(),
       status: this.newTodo.status,
       creationDate: new Date(),
+    })
+
+    this.snackbarService.show({
+      message: 'Task added successfully',
     })
 
     this.resetForm()
